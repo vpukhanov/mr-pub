@@ -1,10 +1,24 @@
 import express from 'express'
+import { createLightship } from 'lightship'
 import { configureRoutes } from './routes'
 
-const PORT = process.env.PORT ?? 3000
+const PORT = Number(process.env.PORT) || 3000
+const LIGHTSHIP_PORT = Number(process.env.LIGHTSHIP_PORT) || 9000
 
 const app = express()
+const lightship = createLightship({ port: LIGHTSHIP_PORT })
+
 configureRoutes(app)
-app.listen(PORT, () => {
-  console.log(`@mr-pub/server listening on port ${PORT}`)
+
+const server = app
+  .listen(PORT, () => {
+    console.log(`@mr-pub/server listening on port ${PORT}`)
+    lightship.signalReady()
+  })
+  .on('error', () => {
+    lightship.shutdown()
+  })
+
+lightship.registerShutdownHandler(() => {
+  server.close()
 })

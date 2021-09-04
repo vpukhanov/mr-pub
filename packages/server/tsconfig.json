@@ -2,8 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "esModuleInterop": true,
-    "noImplicitAny": true
+    "esModuleInterop": true
   },
   "include": ["src/**/*"]
 }
