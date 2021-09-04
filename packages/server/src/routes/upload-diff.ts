@@ -1,9 +1,10 @@
 import { Express } from 'express'
-import { validateFile } from '../controllers/upload'
+import { getDiffFromFile } from '../controllers/upload'
 import { upload } from '../middleware/multer'
 
 export function configureUploadDiffRoute(app: Express) {
   app.post('/upload-diff', upload.single('diff'), (req, res) => {
-    validateFile(req.file)
+    const diff = getDiffFromFile(req.file)
+    res.status(200).json(diff)
   })
 }

@@ -1,12 +1,15 @@
 import { Express } from 'express'
+import parseDiff from 'parse-diff'
 
-const ALLOWED_MIMETYPES = ['text/x-diff', 'text/x-patch']
-
-export function validateFile(file: Express.Multer.File) {
+export function getDiffFromFile(file: Express.Multer.File) {
   if (!file) {
     throw new Error('no file was passed to the uploader')
   }
-  if (!ALLOWED_MIMETYPES.includes(file.mimetype)) {
-    throw new Error(`mime-type ${file.mimetype} is not allowed`)
+  const diff = parseDiff(file.buffer.toString())
+  if (!diff || diff.length === 0) {
+    throw new Error(
+      'file is not in the diff or patch format, or the diff is empty',
+    )
   }
+  return diff
 }
