@@ -29,8 +29,8 @@ spec:
               value: '8080'
           readinessProbe:
             httpGet:
-              path: /ready
-              port: 9000
+              path: /ping
+              port: 8080
             failureThreshold: 1
             initialDelaySeconds: 5
             periodSeconds: 5
@@ -38,8 +38,8 @@ spec:
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
-              path: /live
-              port: 9000
+              path: /ping
+              port: 8080
             failureThreshold: 3
             initialDelaySeconds: 10
             periodSeconds: 30
