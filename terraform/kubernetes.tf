@@ -19,5 +19,10 @@ resource "google_container_node_pool" "default_preemptible_nodes" {
   node_config {
     preemptible  = true
     machine_type = "e2-medium"
+
+    service_account = google_service_account.build-worker.email
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
   }
 }

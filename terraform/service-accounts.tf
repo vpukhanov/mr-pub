@@ -11,3 +11,12 @@ resource "google_service_account" "build-worker" {
   account_id   = "build-worker"
   display_name = "Build Worker"
 }
+
+resource "google_project_iam_binding" "artifact-registry-repo-admin" {
+  provider = google
+
+  role = "roles/artifactregistry.repoAdmin"
+  members = [
+    "serviceAccount:${google_service_account.build-worker.email}"
+  ]
+}
