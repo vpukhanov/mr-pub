@@ -1,0 +1,14 @@
+{
+  "name": "@mr-pub/server",
+  "version": "0.0.0",
+  "author": "Vyacheslav Pukhanov <vyacheslav@pukhanov.ru>",
+  "homepage": "https://github.com/vpukhanov/mr-pub#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vpukhanov/mr-pub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vpukhanov/mr-pub/issues"
+  }
+}

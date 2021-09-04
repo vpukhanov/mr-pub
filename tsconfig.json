@@ -3,6 +3,8 @@
     "module": "commonjs",
     "target": "es6",
     "baseUrl": "./packages",
-    "paths": {}
+    "paths": {
+      "@mr-pub/server": ["server/src"]
+    }
   }
 }
