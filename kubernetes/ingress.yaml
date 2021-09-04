@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mr-pub-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: 34.88.165.108
 spec:
   rules:
     - host: adepti.mister.pub

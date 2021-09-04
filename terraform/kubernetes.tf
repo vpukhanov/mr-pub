@@ -26,3 +26,7 @@ resource "google_container_node_pool" "default_preemptible_nodes" {
     ]
   }
 }
+
+resource "google_compute_address" "default-cluster-address" {
+  name = "default-cluster-address"
+}
