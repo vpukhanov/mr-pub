@@ -1,4 +1,6 @@
 resource "google_container_cluster" "default" {
+  provider = google
+
   name     = "default-cluster"
   location = "europe-north1-a"
 
@@ -7,6 +9,8 @@ resource "google_container_cluster" "default" {
 }
 
 resource "google_container_node_pool" "default_preemptible_nodes" {
+  provider = google
+
   name       = "default-cluster-preemptible-pool"
   location   = google_container_cluster.default.location
   cluster    = google_container_cluster.default.name
