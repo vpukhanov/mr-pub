@@ -1,3 +1,7 @@
 node_modules/
 dist/
 lerna-debug.log
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
