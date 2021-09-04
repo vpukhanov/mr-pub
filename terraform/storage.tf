@@ -3,13 +3,4 @@ resource "google_storage_bucket" "diff-storage" {
   location = "EU"
 
   uniform_bucket_level_access = true
-
-  lifecycle_rule {
-    condition {
-      age = 2
-    }
-    action {
-      type = "Delete"
-    }
-  }
 }
