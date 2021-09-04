@@ -5,6 +5,8 @@
     "baseUrl": "./packages",
     "paths": {
       "@mr-pub/server": ["server/src"]
-    }
+    },
+    "esModuleInterop": true,
+    "noImplicitAny": true
   }
 }
