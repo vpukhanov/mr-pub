@@ -5,7 +5,7 @@
   "homepage": "https://github.com/vpukhanov/mr-pub#readme",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "PORT=4000 next dev",
     "build": "next build",
     "start": "next start",
     "deploy": "gcloud builds submit . --tag europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend"

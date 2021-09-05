@@ -1,5 +1,6 @@
 import express from 'express'
 import { createLightship } from 'lightship'
+import { configureMiddleware } from './middleware'
 import { configureRoutes } from './routes'
 
 const PORT = Number(process.env.PORT) || 3000
@@ -8,6 +9,7 @@ const LIGHTSHIP_PORT = Number(process.env.LIGHTSHIP_PORT) || 9000
 const app = express()
 const lightship = createLightship({ port: LIGHTSHIP_PORT })
 
+configureMiddleware(app)
 configureRoutes(app)
 
 const server = app
