@@ -1,9 +1,11 @@
+import path from 'path'
 import { Express } from 'express'
 import parseDiff from 'parse-diff'
 import { Storage } from '@google-cloud/storage'
 import { v4 as uuidv4 } from 'uuid'
 
-const STORAGE = new Storage()
+const KEY_FILE_PATH = path.resolve(process.cwd(), 'keys/service-worker.json')
+const STORAGE = new Storage({ keyFilename: KEY_FILE_PATH })
 
 export function validateFile(file: Express.Multer.File) {
   if (!file) {

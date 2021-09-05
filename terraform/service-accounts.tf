@@ -5,6 +5,21 @@ resource "google_service_account" "service-worker" {
   display_name = "Service Worker"
 }
 
+resource "google_project_iam_binding" "service-worker-storage-object-admin" {
+  provider = google
+
+  role = "roles/storage.objectAdmin"
+  members = [
+    "serviceAccount:${google_service_account.service-worker.email}"
+  ]
+}
+
+resource "google_service_account_key" "service-worker-key" {
+  provider = google
+
+  service_account_id = google_service_account.service-worker.name
+}
+
 resource "google_service_account" "build-worker" {
   provider = google
 
