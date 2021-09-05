@@ -3,7 +3,9 @@ kind: Ingress
 metadata:
   name: mr-pub-ingress
   annotations:
+    kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: default-cluster-address
+    networking.gke.io/managed-certificates: managed-cert
 spec:
   rules:
     - host: adepti.mister.pub
@@ -16,3 +18,13 @@ spec:
                 name: mr-pub-server-service
                 port:
                   number: 80
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+    - mister.pub
+    - adepti.mister.pub
+    - ether.mister.pub
