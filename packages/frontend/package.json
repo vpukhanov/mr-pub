@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "gcloud builds submit . --tag europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend"
   },
   "repository": {
     "type": "git",
