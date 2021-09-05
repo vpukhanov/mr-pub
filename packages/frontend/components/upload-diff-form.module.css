@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  min-width: 200px;
+  max-width: 350px;
+  margin: 0 auto;
+
+  margin-top: 48px;
+}
+
+.container > :not(:last-child) {
+  margin-bottom: 12px;
+}

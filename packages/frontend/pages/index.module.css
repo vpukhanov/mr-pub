@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.headerLogo {
+  width: 64px;
+  margin-right: 12px;
+}
+
+.main {
+  text-align: center;
+}
+
+.tagline {
+  opacity: 0.6;
+}
+
+.footer {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.centeredContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  padding: 0 18px;
+}
