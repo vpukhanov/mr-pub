@@ -18,6 +18,16 @@ spec:
                 name: mr-pub-server-service
                 port:
                   number: 80
+    - host: mister.pub
+      http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: mr-pub-frontend-service
+                port:
+                  number: 80
 ---
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
