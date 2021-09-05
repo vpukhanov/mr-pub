@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "deploy": "lerna run deploy"
   },
   "license": "MIT",
   "devDependencies": {
