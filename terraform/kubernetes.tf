@@ -14,7 +14,7 @@ resource "google_container_node_pool" "default_preemptible_nodes" {
   name       = "default-cluster-preemptible-pool"
   location   = google_container_cluster.default.location
   cluster    = google_container_cluster.default.name
-  node_count = 1
+  node_count = 2
 
   node_config {
     preemptible  = true
@@ -27,6 +27,8 @@ resource "google_container_node_pool" "default_preemptible_nodes" {
   }
 }
 
-resource "google_compute_address" "default-cluster-address" {
+resource "google_compute_global_address" "default-cluster-address" {
+  provider = google
+
   name = "default-cluster-address"
 }
