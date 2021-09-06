@@ -1,11 +1,6 @@
-import path from 'path'
-import { Express } from 'express'
 import parseDiff from 'parse-diff'
-import { Storage } from '@google-cloud/storage'
 import { v4 as uuidv4 } from 'uuid'
-
-const KEY_FILE_PATH = path.resolve(process.cwd(), 'keys/service-worker.json')
-const STORAGE = new Storage({ keyFilename: KEY_FILE_PATH })
+import { getDiffBucket } from './storage'
 
 export function validateFile(file: Express.Multer.File) {
   if (!file) {
@@ -21,6 +16,6 @@ export function validateFile(file: Express.Multer.File) {
 
 export async function uploadFile(file: Express.Multer.File) {
   const fileName = uuidv4()
-  await STORAGE.bucket('ether.mister.pub').file(fileName).save(file.buffer)
+  await getDiffBucket().file(fileName).save(file.buffer)
   return fileName
 }
