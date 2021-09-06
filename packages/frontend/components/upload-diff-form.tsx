@@ -2,7 +2,11 @@ import { FormEvent, useState } from 'react'
 import { SERVER_HOST } from './constants'
 import s from './upload-diff-form.module.css'
 
-function UploadDiffForm() {
+type UploadDiffFormProps = {
+  onFileUploaded(id: string): void
+}
+
+function UploadDiffForm({ onFileUploaded }: UploadDiffFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -25,7 +29,7 @@ function UploadDiffForm() {
 
     if (res.status === 200) {
       const id = await res.text()
-      alert(`diff submitted as ${id}. todo: redirect to live view`)
+      onFileUploaded(id)
     } else {
       alert(`todo error: ${await res.text()}`)
     }
