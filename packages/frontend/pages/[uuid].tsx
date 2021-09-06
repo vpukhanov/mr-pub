@@ -1,6 +1,9 @@
 import { GetServerSidePropsContext } from 'next'
 import { SERVER_HOST } from '../components/constants'
 import DiffViewer from '../components/diff-viewer'
+import MonocleHeader from '../components/monocle-header'
+
+import s from './[uuid].module.css'
 
 type ViewDiffPageProps = {
   diff: string
@@ -8,8 +11,8 @@ type ViewDiffPageProps = {
 
 function ViewDiffPage({ diff }: ViewDiffPageProps) {
   return (
-    <div>
-      <div>Diff view and collaboration is under construction</div>
+    <div className={s.container}>
+      <MonocleHeader link />
       <DiffViewer diff={diff} />
     </div>
   )

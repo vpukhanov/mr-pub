@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 64px;
+  margin-right: 12px;
+}
+
+.noStyleLink {
+  color: inherit;
+  text-decoration: inherit;
+}

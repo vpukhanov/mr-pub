@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import MonocleFace from '../components/monocle-face'
+import MonocleHeader from '../components/monocle-header'
 import UploadDiffForm from '../components/upload-diff-form'
 
 import s from './index.module.css'
@@ -13,12 +13,7 @@ function IndexPage() {
 
   return (
     <div className={s.centeredContainer}>
-      <header className={s.header}>
-        <div className={s.headerLogo}>
-          <MonocleFace />
-        </div>
-        <h1>Mr. Pub</h1>
-      </header>
+      <MonocleHeader />
       <main className={s.main}>
         <div className={s.tagline}>
           Collaborate&nbsp;on the&nbsp;review of&nbsp;diffs:
