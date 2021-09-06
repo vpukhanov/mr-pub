@@ -2,15 +2,6 @@
   text-align: center;
 }
 
-.tagline {
-  opacity: 0.6;
-}
-
-.footer {
-  margin-top: 48px;
-  text-align: center;
-}
-
 .centeredContainer {
   display: flex;
   flex-direction: column;
