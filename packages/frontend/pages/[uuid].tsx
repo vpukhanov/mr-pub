@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from 'next'
 import { SERVER_HOST } from '../components/constants'
 import DiffViewer from '../components/diff-viewer'
 import MonocleHeader from '../components/monocle-header'
+import SharedFooter from '../components/shared-footer'
 
 import s from './[uuid].module.css'
 
@@ -14,6 +15,11 @@ function ViewDiffPage({ diff }: ViewDiffPageProps) {
     <div className={s.container}>
       <MonocleHeader link />
       <DiffViewer diff={diff} />
+      <SharedFooter>
+        <div className={s.footnote}>
+          Collaboration features are under construction
+        </div>
+      </SharedFooter>
     </div>
   )
 }

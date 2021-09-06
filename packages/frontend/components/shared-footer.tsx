@@ -1,7 +1,7 @@
-import { ReactChildren } from 'react'
+import { ReactElement } from 'react'
 import s from './shared-footer.module.css'
 
-function SharedFooter({ children }: { children?: ReactChildren }) {
+function SharedFooter({ children }: { children?: ReactElement }) {
   return (
     <footer className={s.container}>
       {children}
