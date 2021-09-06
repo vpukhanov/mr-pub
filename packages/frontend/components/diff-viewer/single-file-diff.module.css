@@ -1,0 +1,12 @@
+.container {
+  width: 80%;
+  margin: 24px auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filename {
+  background-color: #eee;
+  font-weight: bold;
+  padding: 4px 8px;
+}

@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next'
 import { SERVER_HOST } from '../components/constants'
+import DiffViewer from '../components/diff-viewer'
 
 type ViewDiffPageProps = {
   diff: string
@@ -9,9 +10,7 @@ function ViewDiffPage({ diff }: ViewDiffPageProps) {
   return (
     <div>
       <div>Diff view and collaboration is under construction</div>
-      <pre>
-        <code>${diff}</code>
-      </pre>
+      <DiffViewer diff={diff} />
     </div>
   )
 }
