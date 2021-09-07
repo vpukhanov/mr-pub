@@ -43,7 +43,7 @@ function UploadDiffForm({ onFileUploaded }: UploadDiffFormProps) {
       method='POST'
       encType='multipart/form-data'
       onSubmit={onSubmit}>
-      <label>Upload a file</label>
+      <label>Upload a .diff or .patch file</label>
       <input id='diff' name='diff' type='file' required />
       <button type='submit' disabled={isSubmitting}>
         Upload
