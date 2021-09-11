@@ -22,7 +22,7 @@ function UploadDiffForm({ onFileUploaded }: UploadDiffFormProps) {
     const formData = new FormData()
     formData.append('diff', diffFile)
 
-    const res = await fetch(`${SERVER_HOST}/upload-diff`, {
+    const res = await fetch(`${SERVER_HOST}/diffs`, {
       method: 'POST',
       body: formData,
     })

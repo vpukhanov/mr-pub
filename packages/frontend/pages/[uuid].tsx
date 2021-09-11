@@ -27,9 +27,7 @@ function ViewDiffPage({ diff }: ViewDiffPageProps) {
 export default ViewDiffPage
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const downloader = await fetch(
-    `${SERVER_HOST}/download-diff/${context.params?.uuid}`,
-  )
+  const downloader = await fetch(`${SERVER_HOST}/diffs/${context.params?.uuid}`)
   const diff = await downloader.text()
 
   if (downloader.status === 404) {
