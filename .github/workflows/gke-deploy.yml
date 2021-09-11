@@ -25,13 +25,13 @@ jobs:
       - name: Build Frontend Image
         working-directory: packages/frontend
         run: |-
-          docker build \
+          docker build . \
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
 
       - name: Build Server Image
         working-directory: packages/server
         run: |-
-          docker build \
+          docker build . \
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
 
       - name: Deploy Images
