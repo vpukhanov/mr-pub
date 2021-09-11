@@ -2,9 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "build": "lerna run build",
-    "deploy": "lerna run deploy --parallel",
-    "force-update-cluster": "cd kubernetes && kubectl rollout restart -f .",
+    "build": "lerna run build --parallel",
     "dev": "lerna run dev --parallel"
   },
   "license": "MIT",

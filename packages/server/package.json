@@ -7,8 +7,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "dev": "PORT=3001 ts-node-dev src/index.ts",
-    "deploy": "gcloud builds submit . --tag europe-north1-docker.pkg.dev/mr-pub/default-docker/server"
+    "dev": "PORT=3001 ts-node-dev src/index.ts"
   },
   "repository": {
     "type": "git",
