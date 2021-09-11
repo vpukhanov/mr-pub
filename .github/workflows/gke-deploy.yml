@@ -20,7 +20,7 @@ jobs:
           export_default_credentials: true
 
       - name: Configure Docker
-        run: gcloud auth configure-docker "europe-north1-docker.pkg.dev/mr-pub/default-docker"
+        run: gcloud auth configure-docker europe-north1-docker.pkg.dev
 
       - name: Build Frontend Image
         working-directory: packages/frontend
