@@ -36,6 +36,24 @@ resource "google_project_iam_binding" "artifact-registry-repo-admin" {
   ]
 }
 
+resource "google_project_iam_binding" "container-admin" {
+  provider = google
+
+  role = "roles/container.admin"
+  members = [
+    "serviceAccount:${google_service_account.build-worker.email}"
+  ]
+}
+
+resource "google_project_iam_binding" "container-cluster-viewer" {
+  provider = google
+
+  role = "roles/container.clusterViewer"
+  members = [
+    "serviceAccount:${google_service_account.build-worker.email}"
+  ]
+}
+
 resource "google_service_account_key" "build-worker-key" {
   provider = google
 
