@@ -1,7 +1,0 @@
-{
-  "manifest_version": 3,
-  "name": "Mr. Pub",
-  "description": "Collaborate on the review of diffs: merge- and pull- requests, patch files",
-  "version": "0.0.0",
-  "default_locale": "en"
-}
