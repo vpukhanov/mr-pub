@@ -27,29 +27,29 @@ jobs:
         run: |-
           docker build . \
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
+          docker image tag \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_REF"
+          docker image tag \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest"
 
       - name: Build Server Image
         working-directory: packages/server
         run: |-
           docker build . \
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
+          docker tag \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_REF"
+          docker tag \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:latest"
 
       - name: Deploy Images
         run: |-
-          docker push "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
-          docker push \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_REF"
-          docker push \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest"
-          docker push "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
-          docker push \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_REF"
-          docker push \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:latest"
+          docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend"
+          docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/server"
 
       - name: Get GKE Credentials
         uses: google-github-actions/get-gke-credentials@main
