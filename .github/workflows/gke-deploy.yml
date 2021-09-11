@@ -29,7 +29,7 @@ jobs:
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
           docker image tag \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_REF"
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:${GITHUB_REF#refs/*/}"
           docker image tag \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest"
@@ -41,7 +41,7 @@ jobs:
             --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
           docker tag \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_REF"
+            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:${GITHUB_REF#refs/*/}"
           docker tag \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:latest"
