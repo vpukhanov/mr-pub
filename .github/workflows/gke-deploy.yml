@@ -22,6 +22,13 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker europe-north1-docker.pkg.dev
 
+      - name: Get GKE Credentials
+        uses: google-github-actions/get-gke-credentials@main
+        with:
+          cluster_name: default-cluster
+          location: europe-north1-a
+          credentials: ${{ secrets.GCP_SA_KEY }}
+
       - name: Build Frontend Image
         working-directory: packages/frontend
         run: |-
@@ -51,13 +58,8 @@ jobs:
           docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend"
           docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/server"
 
-      - name: Get GKE Credentials
-        uses: google-github-actions/get-gke-credentials@main
-        with:
-          cluster_name: default-cluster
-          location: europe-north1-a
-          credentials: ${{ secrets.GCP_SA_KEY }}
-
       - name: Rollout Deployment
         working-directory: kubernetes
-        run: kubectl rollout restart -f .
+        run: |-
+          kubectl rollout restart deployment/mr-pub-frontend
+          kubectl rollout restart deployment/mr-pub-server
