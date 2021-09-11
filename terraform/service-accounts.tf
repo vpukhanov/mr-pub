@@ -36,6 +36,15 @@ resource "google_project_iam_binding" "artifact-registry-repo-admin" {
   ]
 }
 
+resource "google_project_iam_binding" "cloud-build-builds-editor" {
+  provider = google
+
+  role = "roles/cloudbuild.builds.editor"
+  members = [
+    "serviceAccount:${google_service_account.build-worker.email}"
+  ]
+}
+
 resource "google_service_account_key" "build-worker-key" {
   provider = google
 
