@@ -10,7 +10,8 @@ resource "google_project_iam_binding" "service-worker-storage-object-admin" {
 
   role = "roles/storage.objectAdmin"
   members = [
-    "serviceAccount:${google_service_account.service-worker.email}"
+    "serviceAccount:${google_service_account.service-worker.email}",
+    "serviceAccount:${google_service_account.build-worker.email}"
   ]
 }
 
@@ -31,15 +32,6 @@ resource "google_project_iam_binding" "artifact-registry-repo-admin" {
   provider = google
 
   role = "roles/artifactregistry.repoAdmin"
-  members = [
-    "serviceAccount:${google_service_account.build-worker.email}"
-  ]
-}
-
-resource "google_project_iam_binding" "service-usage-consumer" {
-  provider = google
-
-  role = "roles/serviceusage.serviceUsageConsumer"
   members = [
     "serviceAccount:${google_service_account.build-worker.email}"
   ]
