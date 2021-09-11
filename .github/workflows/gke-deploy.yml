@@ -41,6 +41,14 @@ jobs:
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
             "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest"
 
+      - name: Prepare Server Credentials
+        working-directory: packages/server
+        env:
+          GCP_SERVICE_WORKER_KEY: ${{ secrets.GCP_SERVICE_WORKER_KEY }}
+        run: |-
+          mkdir keys
+          echo "$GCP_SERVICE_WORKER_KEY" | base64 -d > keys/service-worker.json
+
       - name: Build Server Image
         working-directory: packages/server
         run: |-
