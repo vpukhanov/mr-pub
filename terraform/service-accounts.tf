@@ -35,3 +35,9 @@ resource "google_project_iam_binding" "artifact-registry-repo-admin" {
     "serviceAccount:${google_service_account.build-worker.email}"
   ]
 }
+
+resource "google_service_account_key" "build-worker-key" {
+  provider = google
+
+  service_account_id = google_service_account.build-worker.name
+}
