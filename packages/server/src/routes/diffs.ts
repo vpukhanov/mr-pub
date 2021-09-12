@@ -1,4 +1,5 @@
 import { Express } from 'express'
+import { ROOT_DOMAIN } from '../constants'
 import { createFileReadStream, fileExists } from '../controllers/download'
 import {
   createOwnerToken,
@@ -40,7 +41,10 @@ export function configureDiffRoutes(app: Express) {
     }
     const id = await uploadFile(file)
     const ownerToken = await createOwnerToken(id, cookies['ownerToken'])
-    res.status(200).cookie('ownerToken', ownerToken).end(id)
+    res
+      .status(200)
+      .cookie('ownerToken', ownerToken, { domain: ROOT_DOMAIN })
+      .end(id)
   })
 
   // DELETE[uuid]: Delete a UUID
@@ -69,6 +73,9 @@ export function configureDiffRoutes(app: Express) {
     await deleteFile(uuid)
 
     const ownerToken = await deleteOwnerToken(uuid, cookies['ownerToken'])
-    res.status(204).cookie('ownerToken', ownerToken).end('No Content')
+    res
+      .status(204)
+      .cookie('ownerToken', ownerToken, { domain: ROOT_DOMAIN })
+      .end('No Content')
   })
 }
