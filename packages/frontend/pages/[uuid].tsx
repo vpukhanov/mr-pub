@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next'
 import { SERVER_HOST } from '../components/constants'
+import DiffActions from '../components/diff-actions'
 import DiffViewer from '../components/diff-viewer'
 import MonocleHeader from '../components/monocle-header'
 import SharedFooter from '../components/shared-footer'
@@ -8,13 +9,15 @@ import s from './[uuid].module.css'
 
 type ViewDiffPageProps = {
   diff: string
+  owner: boolean
 }
 
-function ViewDiffPage({ diff }: ViewDiffPageProps) {
+function ViewDiffPage({ diff, owner }: ViewDiffPageProps) {
   return (
     <div className={s.container}>
       <MonocleHeader link />
       <DiffViewer diff={diff} />
+      <DiffActions owner={owner} />
       <SharedFooter>
         <div className={s.footnote}>
           Collaboration features are under construction
@@ -44,8 +47,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   const diff = await downloader.text()
+  const owner = downloader.headers.get('x-is-owner') === 'true'
 
   return {
-    props: { diff },
+    props: { diff, owner },
   }
 }
