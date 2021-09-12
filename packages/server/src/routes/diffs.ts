@@ -57,6 +57,7 @@ export function configureDiffRoutes(app: Express) {
           'Bearer realm="Ownership of specified resource"',
         )
         .end('Unauthorized')
+      return
     }
 
     const exists = await fileExists(uuid)
