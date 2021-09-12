@@ -23,30 +23,19 @@ async function decodeToken(token: string) {
   })
 }
 
-export async function tokenOwnsId(token: string, id: string) {
+async function decodeTokenPayload(token: string) {
   try {
     const decoded = await decodeToken(token)
-    return decoded.owned.includes(id)
+    return decoded
   } catch (e) {
-    return false
+    return { owned: [] }
   }
 }
 
-export async function createOwnerToken(id: string, previousToken?: string) {
-  let owned = []
-
-  try {
-    const decoded = await decodeToken(previousToken)
-    owned = decoded.owned
-  } catch (e) {
-    // Ignore previous invalid token
-  }
-
-  owned.push(id)
-
+async function signJwt(payload: TokenPayload) {
   return new Promise<string>((resolve, reject) => {
     jwt.sign(
-      { owned },
+      payload,
       JWT_SECRET,
       (err: Error | null, encoded: string | undefined) => {
         if (!err && encoded) {
@@ -57,4 +46,19 @@ export async function createOwnerToken(id: string, previousToken?: string) {
       },
     )
   })
+}
+
+export async function tokenOwnsId(token: string, id: string) {
+  const { owned } = await decodeTokenPayload(token)
+  return owned.includes(id)
+}
+
+export async function createOwnerToken(id: string, previousToken?: string) {
+  const { owned } = await decodeTokenPayload(previousToken)
+  return await signJwt({ owned: [...owned, id] })
+}
+
+export async function deleteOwnerToken(id: string, previousToken: string) {
+  const { owned } = await decodeTokenPayload(previousToken)
+  return await signJwt({ owned: owned.filter((cur) => cur !== id) })
 }

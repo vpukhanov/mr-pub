@@ -32,7 +32,7 @@ function UploadDiffForm({ onFileUploaded }: UploadDiffFormProps) {
       const id = await res.text()
       onFileUploaded(id)
     } else {
-      alert(`todo error: ${await res.text()}`)
+      alert(`error: ${await res.text()}`)
     }
 
     setIsSubmitting(false)

@@ -1,7 +1,11 @@
 import { Express } from 'express'
 import { createFileReadStream, fileExists } from '../controllers/download'
-import { createOwnerToken, tokenOwnsId } from '../controllers/jwt'
-import { validateFile, uploadFile } from '../controllers/upload'
+import {
+  createOwnerToken,
+  deleteOwnerToken,
+  tokenOwnsId,
+} from '../controllers/jwt'
+import { validateFile, uploadFile, deleteFile } from '../controllers/upload'
 import { upload } from '../middleware/multer'
 
 export function configureDiffRoutes(app: Express) {
@@ -10,7 +14,8 @@ export function configureDiffRoutes(app: Express) {
     const { cookies } = req
     const { uuid } = req.params
 
-    if (!(await fileExists(uuid))) {
+    const exists = await fileExists(uuid)
+    if (!exists) {
       res.status(404).end('Diff not found')
       return
     }
@@ -36,5 +41,33 @@ export function configureDiffRoutes(app: Express) {
     const id = await uploadFile(file)
     const ownerToken = await createOwnerToken(id, cookies['ownerToken'])
     res.status(200).cookie('ownerToken', ownerToken).end(id)
+  })
+
+  // DELETE[uuid]: Delete a UUID
+  app.delete('/diffs/:uuid', async (req, res) => {
+    const { cookies } = req
+    const { uuid } = req.params
+
+    const isOwner = await tokenOwnsId(cookies['ownerToken'], uuid)
+    if (!isOwner) {
+      res
+        .status(401)
+        .header(
+          'WWW-Authenticate',
+          'Bearer realm="Ownership of specified resource"',
+        )
+        .end('Unauthorized')
+    }
+
+    const exists = await fileExists(uuid)
+    if (!exists) {
+      res.status(404).end('Diff not found')
+      return
+    }
+
+    await deleteFile(uuid)
+
+    const ownerToken = await deleteOwnerToken(uuid, cookies['ownerToken'])
+    res.status(204).cookie('ownerToken', ownerToken).end('No Content')
   })
 }

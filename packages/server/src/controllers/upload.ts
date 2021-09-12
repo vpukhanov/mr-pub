@@ -19,3 +19,7 @@ export async function uploadFile(file: Express.Multer.File) {
   await getDiffBucket().file(fileName).save(file.buffer)
   return fileName
 }
+
+export async function deleteFile(fileName: string) {
+  await getDiffBucket().file(fileName).delete()
+}
