@@ -1,12 +1,13 @@
 import { Express } from 'express'
 import { createFileReadStream, fileExists } from '../controllers/download'
-import { createOwnerToken } from '../controllers/jwt'
+import { createOwnerToken, tokenOwnsId } from '../controllers/jwt'
 import { validateFile, uploadFile } from '../controllers/upload'
 import { upload } from '../middleware/multer'
 
 export function configureDiffRoutes(app: Express) {
   // GET[uuid]: Download a diff
   app.get('/diffs/:uuid', async (req, res) => {
+    const { cookies } = req
     const { uuid } = req.params
 
     if (!(await fileExists(uuid))) {
@@ -14,7 +15,13 @@ export function configureDiffRoutes(app: Express) {
       return
     }
 
-    res.status(200).contentType('text/x-diff')
+    const isOwner = await tokenOwnsId(cookies['ownerToken'], uuid)
+
+    res
+      .status(200)
+      .contentType('text/x-diff')
+      .header('X-Is-Owner', String(isOwner))
+
     createFileReadStream(uuid).pipe(res, { end: true })
   })
 
