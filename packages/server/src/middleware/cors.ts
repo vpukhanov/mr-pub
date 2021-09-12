@@ -11,6 +11,7 @@ const corsOptions = {
           'http://mister.pub',
         ]
       : 'http://localhost:4000',
+  credentials: true,
 }
 
 export function configureCorsMiddleware(app: Express) {

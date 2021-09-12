@@ -25,6 +25,7 @@ function UploadDiffForm({ onFileUploaded }: UploadDiffFormProps) {
     const res = await fetch(`${SERVER_HOST}/diffs`, {
       method: 'POST',
       body: formData,
+      credentials: 'include',
     })
 
     if (res.status === 200) {

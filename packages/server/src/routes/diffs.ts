@@ -1,5 +1,6 @@
 import { Express } from 'express'
 import { createFileReadStream, fileExists } from '../controllers/download'
+import { createOwnerToken } from '../controllers/jwt'
 import { validateFile, uploadFile } from '../controllers/upload'
 import { upload } from '../middleware/multer'
 
@@ -18,7 +19,7 @@ export function configureDiffRoutes(app: Express) {
   })
 
   // POST[diff={file}]: Upload a diff
-  app.post('/diffs', upload.single('diff'), async ({ file }, res) => {
+  app.post('/diffs', upload.single('diff'), async ({ file, cookies }, res) => {
     const err = validateFile(file)
     if (err instanceof Error) {
       console.error(err)
@@ -26,6 +27,7 @@ export function configureDiffRoutes(app: Express) {
       return
     }
     const id = await uploadFile(file)
-    res.status(200).end(id)
+    const ownerToken = await createOwnerToken(id, cookies['ownerToken'])
+    res.status(200).cookie('ownerToken', ownerToken).end(id)
   })
 }
