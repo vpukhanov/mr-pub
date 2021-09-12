@@ -5,5 +5,5 @@ const KEY_FILE_PATH = path.resolve(process.cwd(), 'keys/service-worker.json')
 const STORAGE = new Storage({ keyFilename: KEY_FILE_PATH })
 
 export function getDiffBucket() {
-  return STORAGE.bucket('ether.mister.pub')
+  return STORAGE.bucket('aether.mister.pub')
 }

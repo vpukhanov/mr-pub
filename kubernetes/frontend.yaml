@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest
+          image: europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:latest
           resources:
             requests:
               memory: '64Mi'

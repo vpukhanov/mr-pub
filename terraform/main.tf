@@ -1,11 +1,11 @@
 provider "google" {
-  project = "mr-pub"
+  project = "mister-pub"
   region  = "europe-north1"
   zone    = "europe-north1-a"
 }
 
 provider "google-beta" {
-  project = "mr-pub"
+  project = "mister-pub"
   region  = "europe-north1"
   zone    = "europe-north1-a"
 }

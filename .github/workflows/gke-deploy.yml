@@ -15,7 +15,7 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
-          project_id: mr-pub
+          project_id: mister-pub
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
@@ -33,13 +33,13 @@ jobs:
         working-directory: packages/frontend
         run: |-
           docker build . \
-            --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA"
+            --tag "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:$GITHUB_SHA"
           docker image tag \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:${GITHUB_REF#refs/*/}"
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:${GITHUB_REF#refs/*/}"
           docker image tag \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend:latest"
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend:latest"
 
       - name: Prepare Server Credentials
         working-directory: packages/server
@@ -53,18 +53,18 @@ jobs:
         working-directory: packages/server
         run: |-
           docker build . \
-            --tag "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA"
+            --tag "europe-north1-docker.pkg.dev/mister-pub/default-docker/server:$GITHUB_SHA"
           docker tag \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:${GITHUB_REF#refs/*/}"
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/server:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/server:${GITHUB_REF#refs/*/}"
           docker tag \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:$GITHUB_SHA" \
-            "europe-north1-docker.pkg.dev/mr-pub/default-docker/server:latest"
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/server:$GITHUB_SHA" \
+            "europe-north1-docker.pkg.dev/mister-pub/default-docker/server:latest"
 
       - name: Deploy Images
         run: |-
-          docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/frontend"
-          docker push --all-tags "europe-north1-docker.pkg.dev/mr-pub/default-docker/server"
+          docker push --all-tags "europe-north1-docker.pkg.dev/mister-pub/default-docker/frontend"
+          docker push --all-tags "europe-north1-docker.pkg.dev/mister-pub/default-docker/server"
 
       - name: Rollout Deployment
         working-directory: kubernetes
